@@ -87,7 +87,7 @@ public class MessageService {
 
     @DELETE
     @Path("{id}")
-    public Response del(@PathParam("id") int id) {
+    public Response delete(@PathParam("id") int id) {
         if (messageController.deleteById(id)) {
             return Response.ok().build();
         } else {
