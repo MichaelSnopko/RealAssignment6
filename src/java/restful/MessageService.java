@@ -5,13 +5,12 @@
  */
 package restful;
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,7 +24,7 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author Michael
+ * @author Michael with help from Tyler
  */
 @Path("/message")
 @ApplicationScoped
@@ -39,7 +38,7 @@ public class MessageService {
     @GET
     @Produces("application/json")
     public Response getAll() {
-        return Response.ok(messageController.getAllJson()).build();
+        return Response.ok(messageController.getallJson()).build();
     }
 
     @GET
@@ -70,7 +69,7 @@ public class MessageService {
     @Consumes("application/json")
     @Produces("application/json")
     public Response add(JsonObject json) {
-        return Response.ok(messageController.addJson(json)).build();
+        return Response.ok(messageController.add(json)).build();
     }
 
     @PUT
@@ -78,7 +77,7 @@ public class MessageService {
     @Consumes("application/json")
     @Produces("application/json")
     public Response edit(@PathParam("id") int id, JsonObject json) {
-        JsonObject jsonWithId = messageController.editJson(id, json);
+        JsonObject jsonWithId = messageController.edit(id, json);
         if (jsonWithId != null) {
             return Response.ok(jsonWithId).build();
         } else {
@@ -97,27 +96,4 @@ public class MessageService {
     }
 }   
     
-//    @GET
-//    @Produces("application/json")
-//    public JsonObject getJson() {
-//        JsonObjectBuilder json = Json.createObjectBuilder();
-//        json.add("messageId", 1);
-//        json.add("title", "Sample Title");
-//        json.add("contents", "Some sample content");
-//        json.add("author", "A. Sample");
-//        json.add("sentTime", "2016-03-31T13:24:11.135Z");
-//        return json.build();
-//    }
-//
-//    @POST
-//    @Consumes("application/json")
-//    @Produces("application/json")
-//    public JsonObject postJson(JsonObject json) {
-//        System.out.println(json.getInt("messageId", 1));
-//        System.out.println(json.getString("title", "Sample Title"));
-//        System.out.println(json.getString("contents", "Some sample content"));
-//        System.out.println(json.getString("author", "A. Sample"));
-//        System.out.println(json.getString("sentTime", "2016-03-31T13:24:11.135Z"));
-//        return json;
-//    }
-//    }
+

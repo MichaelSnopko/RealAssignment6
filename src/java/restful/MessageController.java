@@ -58,7 +58,7 @@ public class MessageController {
     public JsonObject getByIdJson(int id) {
         Message m = getById(id);
         if (m != null) {
-            return getById(id).toJson();
+            return getById(id).toJSON();
         } else {
             return null;
         }
@@ -70,7 +70,7 @@ public class MessageController {
         for (Message m : message) {
             if ((m.getSentTime().after(from) && m.getSentTime().before(to))
                     || m.getSentTime().equals(from) || m.getSentTime().equals(to)) {
-                json.add(m.toJson());
+                json.add(m.toJSON());
             }
         }
         return json.build();
@@ -96,7 +96,7 @@ public class MessageController {
             m.setSentTime(new Date());
             Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, "Failed Parsing Date: " + time);
         }
-        return m.toJson();
+        return m.toJSON();
     }
     
     //DELETE
